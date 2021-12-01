@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input v-model="Text" type="text">
+        <input v-model="Text" @keyup.enter="$emit('searchText', Text)" type="text">
         <button @click="$emit('searchText', Text)">Search</button>
     </div>
 </template>

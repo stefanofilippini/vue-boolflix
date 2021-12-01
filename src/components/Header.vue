@@ -1,13 +1,6 @@
 <template>
   <div class="header">
       <Form @searchText="reciveText"/>
-      <ul v-for="(film, i) in Films" :key="`Film-${i}`">
-            <li> {{ film.title }}</li>
-            <li> {{ film.original_title }}</li>
-            <li v-if="languages.includes(film.original_language)"><img :src="require(`../assets/${film.original_language}.png`)" :alt="film.original_language"></li>
-            <li v-else>{{ film.original_language }}</li>
-            <li> {{ film.vote_average }}</li>
-      </ul>
   </div>
 </template>
 
@@ -25,19 +18,27 @@ export default {
 
     data() {
         return {
-        Films: [],
         Text: '',
+        Films: [],
+        tvSeries: [],
         ApiSearch: '',
         languages: ['it', 'en'],
         }
     },
 
     computed: {
-        Api() {
+        Api_film() {
             if (this.Text === "") {
                 return ''
             } else {
                 return `https://api.themoviedb.org/3/search/movie?api_key=8051fb7b39a9d4b0ab49c690de6c3958&query=${this.Text}`
+            }
+        },
+        Api_tvSeries() {
+            if (this.Text === "") {
+                return ''
+            } else {
+                return `https://api.themoviedb.org/3/search/tv?api_key=8051fb7b39a9d4b0ab49c690de6c3958&query=${this.Text}`
             }
         }
     },
@@ -45,18 +46,31 @@ export default {
     methods: {
         call_api_movie(Api) {
             Axios.get(Api)
-            .then(result => this.Films = result.data.results)
+            .then(result => {
+                this.Films = result.data.results;
+                this.$emit('film', this.Films);
+            })
+            .catch(error => console.log(error));
+        },
+
+        call_api_tvSeries(Api) {
+            Axios.get(Api)
+            .then(result => {
+                this.tvSeries = result.data.results;
+                this.$emit('series', this.tvSeries);
+            })
             .catch(error => console.log(error));
         },
 
         reciveText(Text) {
             this.Text = Text;
-            this.call_api_movie(this.Api)
+            this.call_api_movie(this.Api_film)
+            this.call_api_tvSeries(this.Api_tvSeries)
         },
     }
 }
 </script>
 
-<style scoped leng="scss">
-
+<style scoped lang="scss">
+    
 </style>
