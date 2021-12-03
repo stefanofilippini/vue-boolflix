@@ -31,7 +31,7 @@
                         <span>Riassunto:</span>
                         <span>{{ card.overview }}</span>
                     </div>
-                    <button v-show="card.overview != '' " @click="ReadAll(i)">Read More</button>
+                    <button v-show="card.overview != '' " @click="ReadAll(i)" :class="i === activeCard ? 'active' : '' "></button>
                     <div class="vote">
                         <div v-if="Math.ceil(card.vote_average / 2) !== 0">
                             <span>Votazione media degli utenti: </span>
@@ -133,7 +133,6 @@ export default {
                     text-align: justify;
                     max-height: 47px;
                     overflow: hidden;
-                    transition: 0.3s;
                     &.active {
                         max-height: 500px;
                     }
@@ -144,8 +143,16 @@ export default {
                     border: none;
                     padding: 3px;
                     font-weight: 700;
+                    &::before {
+                        content: 'Read More';
+                    }
                     &:hover {
                         text-decoration: underline;
+                    }
+                    &.active {
+                        &::before {
+                            content: 'Read Less';
+                        }
                     }
                 }
                 .language {
