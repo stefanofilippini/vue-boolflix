@@ -100,6 +100,7 @@ export default {
             display: flex;
             align-items: center;
             height: 100%;
+            margin-right: 30px;
             img {
                 height: 90%;
             }
@@ -109,6 +110,20 @@ export default {
             align-items: center;
             flex-grow: 1;
             list-style: none;
+            li {
+                margin-right: 20px;
+                button {
+                    background-color: transparent;
+                    border: none;
+                    text-transform: uppercase;
+                    font-size: 18px;
+                    color: rgb(190, 190, 190);
+                    transition: 0,5s;
+                    &:hover {
+                        color: white;
+                    }
+                }
+            }
         }
     }
     

@@ -67,15 +67,15 @@ export default {
     methods: {
         ReadAll(index) {
             if (index != this.activeCard) {
-                this.state = false
+                this.state = false;
             }
 
             if (this.state == false) {
                 this.state = true;
-                this.activeCard = index
+                this.activeCard = index;
             } else {
                 this.state = false;
-                this.activeCard = null
+                this.activeCard = null;
             }
         }
     }
@@ -107,7 +107,7 @@ export default {
                 transition: 0.5s;
             }
             .card-information {
-                width: 80%;
+                width: 90%;
                 color: white;
                 position: absolute;
                 display: flex;
@@ -140,9 +140,13 @@ export default {
                 }
                 button {
                     background-color: transparent;
-                    color: white;
-                    border: 1px solid white;
+                    color: #acacac;
+                    border: none;
                     padding: 3px;
+                    font-weight: 700;
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
                 .language {
                     display: flex;
@@ -150,6 +154,9 @@ export default {
                     margin-bottom: 10px;
                     .lang-img {
                         width: 80px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         .flag {
                             width: 50px;
                             height: 25px;
